@@ -1,0 +1,5 @@
+const int CANVAS_WIDTH = 20;
+const int CANVAS_HEIGHT = 20;
+constexpr int CANVAS_PIXEL_COUNT = CANVAS_WIDTH * CANVAS_HEIGHT;
+
+char BORDER = '#';

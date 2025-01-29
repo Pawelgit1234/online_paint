@@ -1,0 +1,3 @@
+#include <cstdint>
+
+struct Cursor;
