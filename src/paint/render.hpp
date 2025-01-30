@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
@@ -5,4 +7,4 @@
 #include "dot.hpp"
 #include "cursor.hpp"
 
-std::string render(std::vector<Dot> dots, std::vector<Cursor> cursors);
+std::string render(const std::vector<Dot>& dots, const std::vector<Cursor>& cursors);

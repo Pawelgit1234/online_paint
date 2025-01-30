@@ -1,16 +1,21 @@
 #include "render.hpp"
 
-std::string render(std::vector<Dot> dots, std::vector<Cursor> cursors)
+std::string render(const std::vector<Dot>& dots, const std::vector<Cursor>& cursors)
 {
     std::string canvas;
     canvas.reserve(CANVAS_PIXEL_COUNT);
 
-    for (int x = 0; x < CANVAS_HEIGHT; x++)
+    for (int y = 0; y < CANVAS_HEIGHT + 1; ++y)
     {
-        for (int y = 0; y < CANVAS_WIDTH; y++)
+        for (int x = 0; x < CANVAS_WIDTH + 1; ++x)
         {
-            if (x == 0 || x == CANVAS_WIDTH || y == 0 || y == CANVAS_HEIGHT)
+            if (x == 0 || y == 0 || x == CANVAS_WIDTH || y == CANVAS_HEIGHT)
                 canvas += BORDER;
+            else
+                canvas += EMPTY;
         }
+        canvas += '\n';
     }
+
+    return canvas;
 }

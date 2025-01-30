@@ -1,1 +1,5 @@
 todo.txt
+.vscode/
+build/
+bin/
+lib/
