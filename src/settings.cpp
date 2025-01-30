@@ -4,10 +4,11 @@ const int CANVAS_WIDTH = 40;
 const int CANVAS_HEIGHT = 8;
 const int CANVAS_PIXEL_COUNT = CANVAS_WIDTH * CANVAS_HEIGHT;
 
-uint8_t CURSOR_SPAWN_X = 0;
-uint8_t CURSOR_SPAWN_Y = 0;
+uint8_t CURSOR_SPAWN_X = 1;
+uint8_t CURSOR_SPAWN_Y = 1;
 
 char BORDER = '#';
 char EMPTY = ' ';
+char DOT = ' ';
 
-Color CURSOR_COLOR = Color::BRIGHT_WHITE;
+Color CURSOR_COLOR = Color::WHITE;

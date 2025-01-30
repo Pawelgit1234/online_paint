@@ -1,9 +1,10 @@
 #pragma once
 
+#include <string>
+
 enum class Color
 {
-    BLACK = 30, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
-
-    BRIGHT_BLACK = 90, BRIGHT_RED, BRIGHT_GREEN, BRIGHT_YELLOW,
-    BRIGHT_BLUE, BRIGHT_MAGENTA, BRIGHT_CYAN, BRIGHT_WHITE,
+    BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
 };
+
+std::string paintChar(char c, Color color);

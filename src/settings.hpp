@@ -13,5 +13,6 @@ extern uint8_t CURSOR_SPAWN_Y;
 
 extern char BORDER;
 extern char EMPTY;
+extern char DOT;
 
 extern Color CURSOR_COLOR;
