@@ -7,8 +7,5 @@ const int CANVAS_PIXEL_COUNT = CANVAS_WIDTH * CANVAS_HEIGHT;
 uint8_t CURSOR_SPAWN_X = 1;
 uint8_t CURSOR_SPAWN_Y = 1;
 
-char BORDER = '#';
-char EMPTY = ' ';
-char DOT = ' ';
-
 Color CURSOR_COLOR = Color::WHITE;
+Color WALL_COLOR = Color::YELLOW;
