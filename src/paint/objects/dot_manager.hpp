@@ -10,7 +10,7 @@ class DotManager
 {
     public:
         void addDot(const Dot& dot);
-        void deleteDot(uint8_t x, uint8_t y);
+        void deleteDot(uint8_t x, uint8_t y); // delete a dot with same coordinates
 
         std::vector<Dot> getDots() const;
 

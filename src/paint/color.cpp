@@ -1,20 +1,18 @@
 #include "color.hpp"
 
-std::string paintChar(char c, Color color)
+std::string paintBackgroundChar(char c, Color color)
 {
-    std::string ansi_code;
+    return "\033[1;" + std::to_string(40 + static_cast<int>(color)) + 'm' + c + "\033[0m";
+}
 
-    switch (color)
-    {
-    case Color::BLACK:         ansi_code = "\033[40m"; break;
-    case Color::RED:           ansi_code = "\033[41m"; break;
-    case Color::GREEN:         ansi_code = "\033[42m"; break;
-    case Color::YELLOW:        ansi_code = "\033[43m"; break;
-    case Color::BLUE:          ansi_code = "\033[44m"; break;
-    case Color::MAGENTA:       ansi_code = "\033[45m"; break;
-    case Color::CYAN:          ansi_code = "\033[46m"; break;
-    case Color::WHITE:         ansi_code = "\033[47m"; break;
-    }
+std::string paintSymbolChar(char c, Color color)
+{
+    return "\033[" + std::to_string(30 + static_cast<int>(color)) + 'm' + c + "\033[0m";
+}
 
-    return ansi_code + c + "\033[0m";
+std::string paintBothChar(char c, Color symbolColor, Color bgColor)
+{
+    return "\033[1;" + std::to_string(30 + static_cast<int>(symbolColor)) + "m" + 
+           "\033[" + std::to_string(40 + static_cast<int>(bgColor)) + "m" + 
+           c + "\033[0m";
 }

@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "color.hpp"
+#include "../color.hpp"
 
 struct Dot
 {

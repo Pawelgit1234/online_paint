@@ -5,7 +5,9 @@
 #include <vector>
 
 #include "../settings.hpp"
-#include "dot.hpp"
-#include "cursor.hpp"
+#include "objects/dot.hpp"
+#include "objects/cursor.hpp"
+#include "../utils/fps_counter.hpp"
 
-std::string render(const std::vector<Dot>& dots, const std::vector<Cursor>& cursors);
+std::string render(const std::vector<Dot>& dots, const std::vector<Cursor>& cursors,
+                   const FpsCounter& fpsCounter);

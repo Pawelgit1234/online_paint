@@ -1,21 +1,25 @@
 #include <iostream>
 #include <vector>
 
-#include "paint/cursor.hpp"
-#include "paint/dot.hpp"
-#include "paint/dot_manager.hpp"
+#include "paint/objects/cursor.hpp"
+#include "paint/objects/dot.hpp"
+#include "paint/objects/dot_manager.hpp"
 #include "paint/color.hpp"
 #include "paint/render.hpp"
 #include "settings.hpp"
-#include "paint/io.hpp"
+#include "io/io.hpp"
+#include "utils/fps_counter.hpp"
 
 int main(int argc, char* argv[])
 {
     Cursor cursor(CURSOR_SPAWN_X, CURSOR_SPAWN_Y, 'f');
     DotManager dotManager;
+    FpsCounter fpsCounter;
     
     while (true)
     {
+        fpsCounter.update();
+
         switch (getAction())
         {
         case Action::MOVE_UP:
@@ -59,7 +63,8 @@ int main(int argc, char* argv[])
             break;
         }
 
-        std::cout << render(dotManager.getDots(), {cursor}) << "\033[H";
+        std::cout << "\033[2J\033[H" << render(dotManager.getDots(), {cursor}, fpsCounter);
+
     }
 
     return 0;

@@ -56,6 +56,9 @@ Action getAction()
         case '8': return Action::SET_WHITE;
         case '9': return Action::DELETE_DOT;
     }
+
+    tcflush(STDIN_FILENO, TCIFLUSH);
+
 #endif
 
     return Action::NOTHING;

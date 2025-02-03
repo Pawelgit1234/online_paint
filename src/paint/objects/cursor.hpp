@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "../settings.hpp"
+#include "../../settings.hpp"
 #include "dot.hpp"
 
 class Cursor

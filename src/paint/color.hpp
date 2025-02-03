@@ -7,4 +7,6 @@ enum class Color
     BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
 };
 
-std::string paintChar(char c, Color color);
+std::string paintBackgroundChar(char c, Color color);
+std::string paintSymbolChar(char c, Color color);
+std::string paintBothChar(char c, Color symbolColor, Color bgColor);

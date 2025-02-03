@@ -2,21 +2,8 @@
 
 void DotManager::addDot(const Dot& dot)
 {
-    const auto it = std::find_if(dots_.begin(), dots_.end(), 
-        [dot](const Dot& d)
-        {
-            return dot.x == d.x && dot.y == d.y;
-        });
-    
-    if (it == dots_.end())
-    {
-        dots_.emplace_back(dot);
-    }
-    else
-    {
-        dots_.erase(it);
-        dots_.emplace_back(dot);
-    }
+    deleteDot(dot.x, dot.y);
+    dots_.emplace_back(dot);
 }
 
 void DotManager::deleteDot(uint8_t x, uint8_t y)
