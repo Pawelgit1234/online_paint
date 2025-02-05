@@ -45,7 +45,7 @@ std::string render(const std::vector<Dot>& dots, const std::vector<Cursor>& curs
               paintBothChar('8', Color::BLACK, Color::WHITE) +
               " 9 - remove, q - quit, " +
               std::to_string(dots.size()) + "d " + // dots count
-              std::to_string(fpsCounter.getFps()) + "fps"; // fps
+              std::to_string(fpsCounter.getFps()) + "fps\n"; // fps
 
     return canvas;
 }

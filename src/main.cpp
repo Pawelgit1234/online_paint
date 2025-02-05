@@ -7,7 +7,7 @@
 #include "paint/color.hpp"
 #include "paint/render.hpp"
 #include "settings.hpp"
-#include "io/io.hpp"
+#include "utils/io.hpp"
 #include "utils/fps_counter.hpp"
 
 int main(int argc, char* argv[])

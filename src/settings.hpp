@@ -5,17 +5,17 @@
 
 #include "paint/color.hpp"
 
-extern const int CANVAS_WIDTH;
-extern const int CANVAS_HEIGHT;
-extern const int CANVAS_PIXEL_COUNT;
+inline constexpr int CANVAS_WIDTH = 40;
+inline constexpr int CANVAS_HEIGHT = 8;
+inline constexpr int CANVAS_PIXEL_COUNT = CANVAS_WIDTH * CANVAS_HEIGHT;
 
-extern const uint8_t CURSOR_SPAWN_X;
-extern const uint8_t CURSOR_SPAWN_Y;
+inline constexpr uint8_t CURSOR_SPAWN_X = 1;
+inline constexpr uint8_t CURSOR_SPAWN_Y = 1;
 
-extern const Color CURSOR_BACKGROUND_COLOR;
-extern const Color CURSOR_SYMBOL_COLOR;
-extern const Color WALL_COLOR;
+inline constexpr Color CURSOR_BACKGROUND_COLOR = Color::WHITE;
+inline constexpr Color CURSOR_SYMBOL_COLOR = Color::BLACK;
+inline constexpr Color WALL_COLOR = Color::YELLOW;
 
-extern const uint16_t TARGET_FPS;
+inline constexpr int TARGET_FPS = 30;
 
-extern const std::chrono::milliseconds FRAME_DURATION;
+inline constexpr std::chrono::milliseconds FRAME_DURATION = std::chrono::milliseconds(1000) / TARGET_FPS;
