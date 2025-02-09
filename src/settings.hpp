@@ -19,3 +19,5 @@ inline constexpr Color WALL_COLOR = Color::YELLOW;
 inline constexpr int TARGET_FPS = 30;
 
 inline constexpr std::chrono::milliseconds FRAME_DURATION = std::chrono::milliseconds(1000) / TARGET_FPS;
+
+inline constexpr size_t MAX_BUFFER_LENGTH = 1024;

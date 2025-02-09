@@ -13,31 +13,35 @@ if(Boost_FOUND)
 endif()
 
 file (GLOB MAIN_SOURCES "src/*/*.cpp")
-file (GLOB MAIN_HEADERS "src/*/*.hpp")
 file (GLOB OTHER_SOURCES "src/*/*/*.cpp")
-file (GLOB OTHER_HEADERS "src/*/*/*.hpp")
-
-add_executable(online_paint.exe
-               src/main.cpp
-               src/settings.hpp
-               ${MAIN_SOURCES}
-               ${MAIN_HEADERS}
-               ${OTHER_SOURCES}
-               ${OTHER_HEADERS}
-               )
-
-target_link_libraries(online_paint.exe Boost::log Boost::log_setup)
-
-
 file (GLOB TEST_SOURCES "tests/*.cpp")
 
+# Client
+add_executable(online_paint_client.exe
+               src/client_main.cpp
+               src/settings.hpp
+               ${MAIN_SOURCES}
+               ${OTHER_SOURCES}
+               )
+
+target_link_libraries(online_paint_client.exe)
+
+# Server
+add_executable(online_paint_server.exe
+               src/server_main.cpp
+               src/settings.hpp
+               ${MAIN_SOURCES}
+               ${OTHER_SOURCES}
+               )
+
+target_link_libraries(online_paint_server.exe Boost::log Boost::log_setup)
+
+# Tests
 add_executable(tests.exe
                src/settings.hpp
                ${TEST_SOURCES}
                ${MAIN_SOURCES}
-               ${MAIN_HEADERS}
                ${OTHER_SOURCES}
-               ${OTHER_HEADERS}
                )
 
 target_link_libraries(tests.exe Boost::unit_test_framework)
