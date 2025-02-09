@@ -21,3 +21,6 @@ inline constexpr int TARGET_FPS = 30;
 inline constexpr std::chrono::milliseconds FRAME_DURATION = std::chrono::milliseconds(1000) / TARGET_FPS;
 
 inline constexpr size_t MAX_BUFFER_LENGTH = 1024;
+
+inline constexpr size_t CURSOR_SIZE = sizeof(uint8_t) * 2 + sizeof(char);
+inline constexpr size_t DOT_SIZE = sizeof(uint8_t) * 2 + sizeof(Color);

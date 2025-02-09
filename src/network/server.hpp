@@ -8,6 +8,7 @@
 #include <boost/asio.hpp>
 
 #include "../settings.hpp"
+#include "serialization.hpp"
 #include "../paint/objects/dot_manager.hpp"
 #include "../paint/objects/cursor_manager.hpp"
 
