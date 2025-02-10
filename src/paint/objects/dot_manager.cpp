@@ -1,5 +1,11 @@
 #include "dot_manager.hpp"
 
+void DotManager::addDots(const std::vector<Dot>& dots)
+{
+    for (const Dot& dot : dots)
+        addDot(dot);
+}
+
 void DotManager::addDot(const Dot& dot)
 {
     deleteDot(dot.x, dot.y);
