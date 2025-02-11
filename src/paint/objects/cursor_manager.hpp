@@ -11,6 +11,7 @@ class CursorManager
         void addCursors(const std::vector<Cursor>& cursors);
         void addCursor(const Cursor& cursor);
         void deleteCursor(char name);
+        void clear();
 
         std::vector<Cursor> getCursors() const;
 

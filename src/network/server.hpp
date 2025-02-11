@@ -16,6 +16,10 @@
 #include "../paint/objects/dot.hpp"
 #include "../utils/log.hpp"
 
+
+
+#include <iostream>
+
 using boost::asio::ip::udp;
 using namespace std::chrono;
 

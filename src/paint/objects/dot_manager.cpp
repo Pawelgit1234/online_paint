@@ -24,6 +24,11 @@ void DotManager::deleteDot(uint8_t x, uint8_t y)
         dots_.erase(it);
 }
 
+void DotManager::clear()
+{
+    dots_.clear();
+}
+
 std::vector<Dot> DotManager::getDots() const
 {
     return dots_;

@@ -21,8 +21,13 @@ void CursorManager::deleteCursor(char name)
             return name == c.getName();
         });
 
-    if (it == cursors_.end())
+    if (it != cursors_.end())
         cursors_.erase(it);
+}
+
+void CursorManager::clear()
+{
+    cursors_.clear();
 }
 
 std::vector<Cursor> CursorManager::getCursors() const

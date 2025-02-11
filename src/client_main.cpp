@@ -9,12 +9,16 @@
 #include "settings.hpp"
 #include "utils/io.hpp"
 #include "utils/fps_counter.hpp"
+#include "network/client.hpp"
 
 int main(int argc, char* argv[])
 {
-    Cursor cursor(CURSOR_SPAWN_X, CURSOR_SPAWN_Y, 'f');
+    char name;
+    std::cin >> name;
+    Cursor cursor(CURSOR_SPAWN_X, CURSOR_SPAWN_Y, name);
     DotManager dotManager;
     FpsCounter fpsCounter;
+    Client client("0.0.0.0", 8080);
     
     while (true)
     {
@@ -63,8 +67,14 @@ int main(int argc, char* argv[])
             break;
         }
 
-        std::cout << "\033[2J\033[H" << render(dotManager.getDots(), {cursor}, fpsCounter);
+        client.send(cursor, dotManager.getDots());
+        dotManager.clear();
 
+        std::vector<Cursor> cursors;
+        std::vector<Dot> dots;
+        client.receive(cursors, dots);
+
+        std::cout << "\033[2J\033[H" << render(dots, cursors, fpsCounter);
     }
 
     return 0;

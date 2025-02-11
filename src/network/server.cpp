@@ -21,7 +21,7 @@ void Server::receive()
                 std::vector<Dot> dots;
                 
                 deserialize(data_.data(), cursors, dots);
-
+                
                 cursorManager_.addCursor(cursors[0]);
                 dotManager_.addDots(dots);
 
@@ -58,7 +58,7 @@ void Server::handleNewClient(char playerName)
 {
     if (clients_.find(playerName) == clients_.end())
     {
-        BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ")"
+        BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ") "
         << remoteEndpoint_.address().to_string() << " connected";
 
         clients_[playerName] = remoteEndpoint_;
@@ -79,7 +79,7 @@ void Server::checkLastActivitys()
 
 void Server::disconnect(char playerName)
 {
-    BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ")"
+    BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ") "
     << clients_[playerName].address().to_string() << " disconnected";
 
     cursorManager_.deleteCursor(playerName);
