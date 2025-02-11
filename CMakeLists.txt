@@ -24,7 +24,9 @@ add_executable(online_paint_client.exe
                ${OTHER_SOURCES}
                )
 
-target_link_libraries(online_paint_client.exe)
+# target_link_libraries(online_paint_client.exe)
+target_link_libraries(online_paint_client.exe Boost::log Boost::log_setup)
+
 
 # Server
 add_executable(online_paint_server.exe
@@ -44,4 +46,4 @@ add_executable(tests.exe
                ${OTHER_SOURCES}
                )
 
-target_link_libraries(tests.exe Boost::unit_test_framework)
+target_link_libraries(tests.exe Boost::unit_test_framework Boost::log Boost::log_setup)

@@ -14,6 +14,7 @@
 #include "../paint/objects/cursor_manager.hpp"
 #include "../paint/objects/cursor.hpp"
 #include "../paint/objects/dot.hpp"
+#include "../utils/log.hpp"
 
 using boost::asio::ip::udp;
 using namespace std::chrono;

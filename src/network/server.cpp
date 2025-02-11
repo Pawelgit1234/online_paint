@@ -3,6 +3,9 @@
 Server::Server(boost::asio::io_context& io_context, uint16_t port)
     : socket_(io_context, udp::endpoint(udp::v4(), port))
 {
+    BOOST_LOG_TRIVIAL(info) << "Server " << socket_.local_endpoint().address().to_string()
+    << " runs on port " << socket_.local_endpoint().port();
+
     receive();
 }
 
@@ -55,6 +58,9 @@ void Server::handleNewClient(char playerName)
 {
     if (clients_.find(playerName) == clients_.end())
     {
+        BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ")"
+        << remoteEndpoint_.address().to_string() << " connected";
+
         clients_[playerName] = remoteEndpoint_;
     }
 }
@@ -73,6 +79,9 @@ void Server::checkLastActivitys()
 
 void Server::disconnect(char playerName)
 {
+    BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ")"
+    << clients_[playerName].address().to_string() << " disconnected";
+
     cursorManager_.deleteCursor(playerName);
 
     auto clientIt = clients_.find(playerName);
