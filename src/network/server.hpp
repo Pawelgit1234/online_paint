@@ -16,10 +16,6 @@
 #include "../paint/objects/dot.hpp"
 #include "../utils/log.hpp"
 
-
-
-#include <iostream>
-
 using boost::asio::ip::udp;
 using namespace std::chrono;
 
@@ -41,6 +37,9 @@ class Server
 
         std::unordered_map<char, udp::endpoint> clients_; // name: endpoint
         std::unordered_map<char, std::chrono::steady_clock::time_point> lastActivitys_;
+
+        boost::asio::steady_timer broadcastTimer_;
+        boost::asio::steady_timer activityTimer_;
 
         DotManager dotManager_;
         CursorManager cursorManager_;

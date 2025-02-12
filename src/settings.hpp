@@ -19,9 +19,10 @@ inline constexpr Color WALL_COLOR = Color::YELLOW;
 inline constexpr int TARGET_FPS = 30;
 
 inline constexpr std::chrono::milliseconds FRAME_DURATION = std::chrono::milliseconds(1000) / TARGET_FPS;
+inline constexpr std::chrono::seconds ACTIVITY_TIME = std::chrono::seconds(1);
 
 inline constexpr size_t MAX_BUFFER_LENGTH = 1024; // 1024 bytes
-inline constexpr size_t CLIENT_TIMEOUT = 10; // 10 seconds
+inline constexpr size_t CLIENT_TIMEOUT = 120; // 10 seconds
 
 inline constexpr size_t CURSOR_SIZE = sizeof(uint8_t) * 2 + sizeof(char);
 inline constexpr size_t DOT_SIZE = sizeof(uint8_t) * 2 + sizeof(Color);

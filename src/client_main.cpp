@@ -19,12 +19,15 @@ int main(int argc, char* argv[])
     DotManager dotManager;
     FpsCounter fpsCounter;
     Client client("0.0.0.0", 8080);
+
+    bool moved = true;
     
     while (true)
     {
         fpsCounter.update();
 
-        switch (getAction())
+        Action action = getAction();
+        switch (action) 
         {
         case Action::MOVE_UP:
             cursor.moveUp();
@@ -67,8 +70,15 @@ int main(int argc, char* argv[])
             break;
         }
 
-        client.send(cursor, dotManager.getDots());
-        dotManager.clear();
+        if (action != Action::NOTHING)
+            moved = true;
+        
+        if (moved)
+        {
+            client.send(cursor, dotManager.getDots());
+            dotManager.clear();
+            moved = false;
+        }
 
         std::vector<Cursor> cursors;
         std::vector<Dot> dots;
