@@ -5,7 +5,8 @@ void initLogging()
     boost::log::add_file_log(
         boost::log::keywords::file_name = "logs/log_%N.log", 
         boost::log::keywords::rotation_size = 10 * 1024 * 1024,  // 10 MB
-        boost::log::keywords::format = "[%TimeStamp%] [%Severity%]: %Message%"
+        boost::log::keywords::format = "[%TimeStamp%] [%Severity%]: %Message%",
+        boost::log::keywords::auto_flush = true
     );
 
     boost::log::add_console_log(

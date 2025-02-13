@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <chrono>
 #include <array>
+#include <algorithm>
 #include <vector>
 
 #include <boost/asio.hpp>

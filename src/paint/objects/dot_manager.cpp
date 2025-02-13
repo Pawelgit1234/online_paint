@@ -9,7 +9,9 @@ void DotManager::addDots(const std::vector<Dot>& dots)
 void DotManager::addDot(const Dot& dot)
 {
     deleteDot(dot.x, dot.y);
-    dots_.emplace_back(dot);
+
+    if (dot.color != Color::DELETE)
+        dots_.emplace_back(dot);
 }
 
 void DotManager::deleteDot(uint8_t x, uint8_t y)

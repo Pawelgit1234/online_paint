@@ -16,7 +16,6 @@ int main(int argc, char* argv[])
     char name;
     std::cin >> name;
     Cursor cursor(CURSOR_SPAWN_X, CURSOR_SPAWN_Y, name);
-    DotManager dotManager;
     FpsCounter fpsCounter;
     Client client("0.0.0.0", 8080);
 
@@ -24,6 +23,7 @@ int main(int argc, char* argv[])
     
     while (true)
     {
+        Dot dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::DELETE);
         fpsCounter.update();
 
         Action action = getAction();
@@ -42,31 +42,31 @@ int main(int argc, char* argv[])
             cursor.moveRight();
             break;
         case Action::SET_BLACK:
-            dotManager.addDot(cursor.createDot(Color::BLACK));
+            dot = cursor.createDot(Color::BLACK);
             break;
         case Action::SET_RED:
-            dotManager.addDot(cursor.createDot(Color::RED));
+            dot = cursor.createDot(Color::RED);
             break;
         case Action::SET_GREEN:
-            dotManager.addDot(cursor.createDot(Color::GREEN));
+            dot = cursor.createDot(Color::GREEN);
             break;
         case Action::SET_YELLOW:
-            dotManager.addDot(cursor.createDot(Color::YELLOW));
+            dot = cursor.createDot(Color::YELLOW);
             break;
         case Action::SET_BLUE:
-            dotManager.addDot(cursor.createDot(Color::BLUE));
+            dot = cursor.createDot(Color::BLUE);
             break;
         case Action::SET_MAGENTA:
-            dotManager.addDot(cursor.createDot(Color::MAGENTA));
+            dot = cursor.createDot(Color::MAGENTA);
             break;
         case Action::SET_CYAN:
-            dotManager.addDot(cursor.createDot(Color::CYAN));
+            dot = cursor.createDot(Color::CYAN);
             break;
         case Action::SET_WHITE:
-            dotManager.addDot(cursor.createDot(Color::WHITE));
+            dot = cursor.createDot(Color::WHITE);
             break;
         case Action::DELETE_DOT:
-            dotManager.deleteDot(cursor.getX(), cursor.getY());
+            dot = cursor.createDot(Color::DELETE);
             break;
         }
 
@@ -75,8 +75,7 @@ int main(int argc, char* argv[])
         
         if (moved)
         {
-            client.send(cursor, dotManager.getDots());
-            dotManager.clear();
+            client.send(cursor, dot);
             moved = false;
         }
 

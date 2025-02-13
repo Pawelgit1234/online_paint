@@ -14,7 +14,7 @@ static void serializeDot(const Dot& dot, uint8_t* buffer)
     buffer[2] = static_cast<uint8_t>(dot.color);
 }
 
-void serialize(const std::vector<Cursor>& cursors, const std::vector<Dot>& dots, uint8_t* buffer)
+size_t serialize(const std::vector<Cursor>& cursors, const std::vector<Dot>& dots, uint8_t* buffer)
 {
     size_t offset = 0;
     buffer[offset++] = static_cast<uint8_t>(cursors.size());
@@ -31,6 +31,8 @@ void serialize(const std::vector<Cursor>& cursors, const std::vector<Dot>& dots,
         serializeDot(dot, buffer + offset);
         offset += DOT_SIZE;
     }
+
+    return offset;
 }
 
 static void deserializeCursor(const uint8_t* buffer, Cursor& cursor)
@@ -43,7 +45,7 @@ static void deserializeDot(const uint8_t* buffer, Dot& dot)
     dot = Dot(buffer[0], buffer[1], static_cast<Color>(buffer[2]));
 }
 
-void deserialize(const uint8_t* buffer, std::vector<Cursor>& cursors, std::vector<Dot>& dots)
+size_t deserialize(const uint8_t* buffer, std::vector<Cursor>& cursors, std::vector<Dot>& dots)
 {
     size_t offset = 0;
     size_t cursorCount = buffer[offset++];
@@ -67,4 +69,6 @@ void deserialize(const uint8_t* buffer, std::vector<Cursor>& cursors, std::vecto
         dots.push_back(dot);
         offset += DOT_SIZE;
     }
+
+    return offset;
 }

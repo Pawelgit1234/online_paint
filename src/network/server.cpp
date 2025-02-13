@@ -26,7 +26,7 @@ void Server::receive()
                 deserialize(data_.data(), cursors, dots);
                 
                 cursorManager_.addCursor(cursors[0]);
-                dotManager_.addDots(dots);
+                dotManager_.addDot(dots[0]);
 
                 lastActivitys_[cursors[0].getName()] = std::chrono::steady_clock::now();
                 handleNewClient(cursors[0].getName());
@@ -43,12 +43,12 @@ void Server::broadcast()
     std::vector<Dot> dots = dotManager_.getDots();
     std::array<uint8_t, MAX_BUFFER_LENGTH> buffer;
 
-    serialize(cursors, dots, buffer.data());
+    size_t bytes_length = serialize(cursors, dots, buffer.data());
 
     for (const auto& [name, endpoint] : clients_)
     {
         socket_.async_send_to(
-            boost::asio::buffer(buffer, MAX_BUFFER_LENGTH), endpoint,
+            boost::asio::buffer(buffer, bytes_length), endpoint,
             [](boost::system::error_code /*ec*/, size_t /*bytes_sent*/){}
         );
     }
@@ -76,12 +76,17 @@ void Server::handleNewClient(char playerName)
 void Server::checkLastActivitys()
 {
     const auto now = std::chrono::steady_clock::now();
-    for (const auto& [name, lastActivity] : lastActivitys_)
+    for (auto it = lastActivitys_.begin(); it != lastActivitys_.end(); )
     {
-        std::chrono::duration<double> elapsed = now - lastActivity;
+        std::chrono::duration<double> elapsed = now - it->second;
 
         if (elapsed.count() > CLIENT_TIMEOUT)
-            disconnect(name);
+        {
+            disconnect(it->first);
+            it = lastActivitys_.erase(it);
+        } 
+        else
+            ++it;
     }
 
     activityTimer_.expires_after(ACTIVITY_TIME);
@@ -102,7 +107,4 @@ void Server::disconnect(char playerName)
 
     auto clientIt = clients_.find(playerName);
     clients_.erase(clientIt);
-
-    auto lastActivityIt = lastActivitys_.find(playerName);
-    lastActivitys_.erase(lastActivityIt);
 }

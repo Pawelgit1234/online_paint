@@ -24,13 +24,13 @@ void Client::receive(std::vector<Cursor>& cursors, std::vector<Dot>& dots)
         deserialize(buffer.data(), cursors, dots);
 }
 
-void Client::send(const Cursor& cursor, const std::vector<Dot>& dots)
+void Client::send(const Cursor& cursor, const Dot& dot)
 {
     std::array<uint8_t, MAX_BUFFER_LENGTH> buffer;
-    serialize({cursor}, dots, buffer.data());
+    size_t bytes_length = serialize({cursor}, {dot}, buffer.data());
 
     socket_.send_to(
-        boost::asio::buffer(buffer, MAX_BUFFER_LENGTH),
+        boost::asio::buffer(buffer, bytes_length),
         serverEndpoint_
     );
 }

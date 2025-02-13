@@ -19,7 +19,7 @@ class Client
         Client(const std::string& host, uint16_t port);
 
         void receive(std::vector<Cursor>& cursors, std::vector<Dot>& dots);
-        void send(const Cursor& cursor, const std::vector<Dot>& dots);
+        void send(const Cursor& cursor, const Dot& dot);
 
     private:
         boost::asio::io_context io_context_;
