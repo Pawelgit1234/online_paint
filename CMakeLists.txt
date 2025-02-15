@@ -5,7 +5,7 @@ project(OnlinePaint LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Boost REQUIRED COMPONENTS log log_setup unit_test_framework)
+find_package(Boost REQUIRED COMPONENTS log log_setup unit_test_framework program_options)
 
 if(Boost_FOUND)
     message(STATUS "Boost found: ${Boost_INCLUDE_DIRS}")
@@ -16,6 +16,11 @@ file (GLOB MAIN_SOURCES "src/*/*.cpp")
 file (GLOB OTHER_SOURCES "src/*/*/*.cpp")
 file (GLOB TEST_SOURCES "tests/*.cpp")
 
+
+
+message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
+
+
 # Client
 add_executable(online_paint_client.exe
                src/client_main.cpp
@@ -25,7 +30,7 @@ add_executable(online_paint_client.exe
                )
 
 # target_link_libraries(online_paint_client.exe)
-target_link_libraries(online_paint_client.exe Boost::log Boost::log_setup)
+target_link_libraries(online_paint_client.exe ${Boost_LIBRARIES})
 
 
 # Server
@@ -36,7 +41,7 @@ add_executable(online_paint_server.exe
                ${OTHER_SOURCES}
                )
 
-target_link_libraries(online_paint_server.exe Boost::log Boost::log_setup)
+target_link_libraries(online_paint_server.exe ${Boost_LIBRARIES})
 
 # Tests
 add_executable(tests.exe
@@ -46,4 +51,4 @@ add_executable(tests.exe
                ${OTHER_SOURCES}
                )
 
-target_link_libraries(tests.exe Boost::unit_test_framework Boost::log Boost::log_setup)
+target_link_libraries(tests.exe ${Boost_LIBRARIES})

@@ -13,11 +13,20 @@
 
 int main(int argc, char* argv[])
 {
+    std::string host;
+    std::string port;
     char name;
+
+    std::cout << "Host: ";
+    std::cin >> host;
+    std::cout << "Port: ";
+    std::cin >> port;
+    std::cout << "Name (one letter): ";
     std::cin >> name;
+
     Cursor cursor(CURSOR_SPAWN_X, CURSOR_SPAWN_Y, name);
     FpsCounter fpsCounter;
-    Client client("0.0.0.0", 8080);
+    Client client(host, std::stoi(port));
 
     std::vector<Cursor> receivedCursors;
     std::vector<Dot> receivedDots;
