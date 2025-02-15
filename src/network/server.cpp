@@ -18,18 +18,40 @@ void Server::receive()
         boost::asio::buffer(data_, MAX_BUFFER_LENGTH), remoteEndpoint_,
         [this](boost::system::error_code ec, size_t bytes_received)
         {
-            if (!ec && bytes_received > 0)
+            try
             {
-                std::vector<Cursor> cursors;
-                std::vector<Dot> dots;
-                
-                deserialize(data_.data(), cursors, dots);
-                
-                cursorManager_.addCursor(cursors[0]);
-                dotManager_.addDot(dots[0]);
+                if (!ec && bytes_received > 0)
+                {
+                    if (data_[0] == QUIT_SIGNAL)
+                    {
+                        auto it = std::find_if(
+                            clients_.begin(),
+                            clients_.end(),
+                            [&](const auto& client)
+                            {
+                                return remoteEndpoint_ == client.second;
+                            });
 
-                lastActivitys_[cursors[0].getName()] = std::chrono::steady_clock::now();
-                handleNewClient(cursors[0].getName());
+                        quit(it->first);
+                    }
+                    else
+                    {
+                        std::vector<Cursor> cursors;
+                        std::vector<Dot> dots;
+                        
+                        deserialize(data_.data(), cursors, dots);
+                        
+                        cursorManager_.addCursor(cursors[0]);
+                        dotManager_.addDot(dots[0]);
+
+                        lastActivitys_[cursors[0].getName()] = std::chrono::steady_clock::now();
+                        handleNewClient(cursors[0].getName());
+                    }
+                }
+            }
+            catch(const std::exception& e)
+            {
+                BOOST_LOG_TRIVIAL(error) << e.what();
             }
 
             receive();
@@ -96,6 +118,21 @@ void Server::checkLastActivitys()
             if (!ec)
                 checkLastActivitys();
         });
+}
+
+void Server::quit(char playerName)
+{
+    BOOST_LOG_TRIVIAL(info) << "Client (" << playerName << ") "
+    << clients_[playerName].address().to_string() << " quited";
+
+    cursorManager_.deleteCursor(playerName);
+
+    auto clientIt = clients_.find(playerName);
+    clients_.erase(clientIt);
+
+    auto LastActivityIt = lastActivitys_.find(playerName);
+    lastActivitys_.erase(LastActivityIt);
+
 }
 
 void Server::disconnect(char playerName)

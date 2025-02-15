@@ -16,8 +16,6 @@ int main(int argc, char* argv[])
     catch(const std::exception& e)
     {
         BOOST_LOG_TRIVIAL(fatal) << e.what();
-        boost::log::core::get()->flush();
-        boost::log::core::get()->remove_all_sinks();
     }
 
     return 0;

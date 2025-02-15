@@ -20,6 +20,9 @@ class Client
 
         void receive(std::vector<Cursor>& cursors, std::vector<Dot>& dots);
         void send(const Cursor& cursor, const Dot& dot);
+        void quit();
+
+        bool haveDataToRead();
 
     private:
         boost::asio::io_context io_context_;

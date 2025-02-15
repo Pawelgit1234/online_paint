@@ -34,3 +34,18 @@ void Client::send(const Cursor& cursor, const Dot& dot)
         serverEndpoint_
     );
 }
+
+void Client::quit()
+{
+    std::array<uint8_t, MAX_BUFFER_LENGTH> buffer = {QUIT_SIGNAL};
+
+    socket_.send_to(
+        boost::asio::buffer(buffer, 1),
+        serverEndpoint_
+    );
+}
+
+bool Client::haveDataToRead()
+{
+    return socket_.available() > 0;
+}

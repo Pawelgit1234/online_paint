@@ -5,7 +5,7 @@
 
 #include "paint/color.hpp"
 
-inline constexpr int CANVAS_WIDTH = 40;
+inline constexpr int CANVAS_WIDTH = 41;
 inline constexpr int CANVAS_HEIGHT = 8;
 inline constexpr int CANVAS_PIXEL_COUNT = CANVAS_WIDTH * CANVAS_HEIGHT;
 
@@ -26,3 +26,4 @@ inline constexpr size_t CLIENT_TIMEOUT = 120; // seconds
 
 inline constexpr size_t CURSOR_SIZE = sizeof(uint8_t) * 2 + sizeof(char);
 inline constexpr size_t DOT_SIZE = sizeof(uint8_t) * 2 + sizeof(Color);
+inline constexpr uint8_t QUIT_SIGNAL = 0xFF;

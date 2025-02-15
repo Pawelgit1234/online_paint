@@ -30,7 +30,9 @@ class Server
         void broadcast();
         void handleNewClient(char playerName);
         void checkLastActivitys();
-        void disconnect(char playerName);
+
+        void disconnect(char playerName); // if player to long AFK
+        void quit(char playerName); // if player quit
 
         udp::socket socket_;
         udp::endpoint remoteEndpoint_;
