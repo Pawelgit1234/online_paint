@@ -10,7 +10,7 @@ void DotManager::addDot(const Dot& dot)
 {
     deleteDot(dot.x, dot.y);
 
-    if (dot.color != Color::DELETE)
+    if (dot.color != Color::REMOVE)
         dots_.emplace_back(dot);
 }
 

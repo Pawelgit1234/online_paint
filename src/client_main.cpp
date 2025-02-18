@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 
+#include "network/client.hpp"
 #include "paint/objects/cursor.hpp"
 #include "paint/objects/dot.hpp"
 #include "paint/objects/dot_manager.hpp"
@@ -9,7 +10,6 @@
 #include "settings.hpp"
 #include "utils/io.hpp"
 #include "utils/fps_counter.hpp"
-#include "network/client.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -31,13 +31,13 @@ int main(int argc, char* argv[])
     std::vector<Cursor> receivedCursors;
     std::vector<Dot> receivedDots;
 
-    client.send(cursor, Dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::DELETE)); // just one time for joining server
+    client.send(cursor, Dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::REMOVE)); // just one time for joining server
 
     try
     {
         while (true)
         {
-            Dot dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::DELETE); // these coordinates, because normally they are normally impossible 
+            Dot dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::REMOVE); // these coordinates, because normally they are normally impossible 
             fpsCounter.update();
 
             Action action = getAction();
@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
                 dot = cursor.createDot(Color::WHITE);
                 break;
             case Action::DELETE_DOT:
-                dot = cursor.createDot(Color::DELETE);
+                dot = cursor.createDot(Color::REMOVE);
                 break;
             case Action::QUIT:
                 client.quit();

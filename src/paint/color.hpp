@@ -5,7 +5,7 @@
 enum class Color
 {
     BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
-    DELETE, // workaround
+    REMOVE, // workaround
 };
 
 std::string paintBackgroundChar(char c, Color color);

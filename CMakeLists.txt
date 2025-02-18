@@ -16,11 +16,6 @@ file (GLOB MAIN_SOURCES "src/*/*.cpp")
 file (GLOB OTHER_SOURCES "src/*/*/*.cpp")
 file (GLOB TEST_SOURCES "tests/*.cpp")
 
-
-
-message(STATUS "Boost Libraries: ${Boost_LIBRARIES}")
-
-
 # Client
 add_executable(online_paint_client.exe
                src/client_main.cpp
