@@ -16,8 +16,10 @@ inline constexpr Color CURSOR_BACKGROUND_COLOR = Color::WHITE;
 inline constexpr Color CURSOR_SYMBOL_COLOR = Color::BLACK;
 inline constexpr Color WALL_COLOR = Color::YELLOW;
 
-inline constexpr int TARGET_FPS = 60;
+inline constexpr int TARGET_FPS = 30;
+inline constexpr int SERVER_DELAY = 20; // windows client lags a bit if client and server have the same delay
 inline constexpr std::chrono::milliseconds FRAME_DURATION = std::chrono::milliseconds(1000) / TARGET_FPS;
+inline constexpr std::chrono::milliseconds SERVER_DELAY_DURATION = std::chrono::milliseconds(1000) / SERVER_DELAY;
 
 inline constexpr std::chrono::seconds ACTIVITY_TIME = std::chrono::seconds(1);
 

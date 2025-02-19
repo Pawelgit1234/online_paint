@@ -90,7 +90,7 @@ void Server::broadcast()
         );
     }
 
-    broadcastTimer_.expires_after(FRAME_DURATION);
+    broadcastTimer_.expires_after(SERVER_DELAY_DURATION);
     broadcastTimer_.async_wait(
         [this](boost::system::error_code ec)
         {
