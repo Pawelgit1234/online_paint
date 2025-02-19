@@ -13,6 +13,10 @@
 
 int main(int argc, char* argv[])
 {
+#ifdef _WIN32
+    setupWindowsTerminal();
+#endif
+
     std::string host;
     std::string port;
     char name;
@@ -31,10 +35,10 @@ int main(int argc, char* argv[])
     std::vector<Cursor> receivedCursors;
     std::vector<Dot> receivedDots;
 
-    client.send(cursor, Dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::REMOVE)); // just one time for joining server
-
     try
     {
+        client.send(cursor, Dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::REMOVE)); // just one time for joining server
+
         while (true)
         {
             Dot dot(CANVAS_WIDTH, CANVAS_HEIGHT, Color::REMOVE); // these coordinates, because normally they are normally impossible 
@@ -95,7 +99,11 @@ int main(int argc, char* argv[])
             if (client.haveDataToRead())
                 client.receive(receivedCursors, receivedDots);
 
+#ifdef _WIN32
+            fastDrawingWindows(render(receivedCursors, receivedDots, fpsCounter));
+#else
             std::cout << "\033[2J\033[H" << render(receivedCursors, receivedDots, fpsCounter);
+#endif
         }
 
     }

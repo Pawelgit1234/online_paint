@@ -16,9 +16,9 @@ inline constexpr Color CURSOR_BACKGROUND_COLOR = Color::WHITE;
 inline constexpr Color CURSOR_SYMBOL_COLOR = Color::BLACK;
 inline constexpr Color WALL_COLOR = Color::YELLOW;
 
-inline constexpr int TARGET_FPS = 30;
-
+inline constexpr int TARGET_FPS = 60;
 inline constexpr std::chrono::milliseconds FRAME_DURATION = std::chrono::milliseconds(1000) / TARGET_FPS;
+
 inline constexpr std::chrono::seconds ACTIVITY_TIME = std::chrono::seconds(1);
 
 inline constexpr size_t MAX_BUFFER_LENGTH = 2048; // bytes

@@ -24,7 +24,6 @@ add_executable(online_paint_client.exe
                ${OTHER_SOURCES}
                )
 
-# target_link_libraries(online_paint_client.exe)
 target_link_libraries(online_paint_client.exe ${Boost_LIBRARIES})
 
 

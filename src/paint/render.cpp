@@ -1,5 +1,25 @@
 #include "render.hpp"
 
+#ifdef _WIN32
+    void setupWindowsTerminal()
+    {
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+        DWORD dwMode = 0;
+        GetConsoleMode(hOut, &dwMode);
+        SetConsoleMode(hOut, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+    }
+
+    void fastDrawingWindows(const std::string& frame)
+    {
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+        COORD coord = {0, 0};
+        SetConsoleCursorPosition(hOut, coord);
+        DWORD written;
+        WriteConsoleA(hOut, frame.c_str(), frame.size(), &written, NULL);
+    }
+#endif
+
 std::string render(const std::vector<Cursor>& cursors, const std::vector<Dot>& dots,
                    const FpsCounter& fpsCounter)
 {
