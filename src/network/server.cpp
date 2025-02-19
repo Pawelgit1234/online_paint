@@ -4,8 +4,23 @@ Server::Server(boost::asio::io_context& io_context, uint16_t port)
     : socket_(io_context, udp::endpoint(udp::v4(), port)),
     broadcastTimer_(io_context), activityTimer_(io_context)
 {
-    BOOST_LOG_TRIVIAL(info) << "Server " << socket_.local_endpoint().address().to_string()
-    << " runs on port " << socket_.local_endpoint().port();
+    udp::socket temp_socket(io_context);
+    temp_socket.open(udp::v4());
+
+    boost::asio::ip::udp::endpoint remote_endpoint(
+        boost::asio::ip::make_address("8.8.8.8"), 53);
+
+    boost::system::error_code ec;
+    temp_socket.connect(remote_endpoint, ec);
+
+    if (!ec)
+    {
+        BOOST_LOG_TRIVIAL(info) << "Server runs on IP: "
+                                << temp_socket.local_endpoint().address().to_string()
+                                << " and port: " << socket_.local_endpoint().port();
+    }
+
+    temp_socket.close();
 
     receive();
     broadcast();
